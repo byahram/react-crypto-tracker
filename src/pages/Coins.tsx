@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { fetchCoins } from "../api/api";
 import { Helmet } from "react-helmet";
 import { useSetRecoilState } from "recoil";
-import { isDarkAtom } from "../atoms";
+import { isDarkAtom } from "../stores/atoms";
 
 interface CoinInterface {
   id: string;

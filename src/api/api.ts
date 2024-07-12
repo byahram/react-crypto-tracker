@@ -4,13 +4,19 @@ export function fetchCoins() {
   return fetch(`${BASE_URL}/coins`).then((response) => response.json());
 }
 
-export function fetchCoinInfo(coinId: string) {
+export function fetchCoinDetail(coinId: string) {
   return fetch(`${BASE_URL}/coins/${coinId}`).then((response) =>
     response.json()
   );
 }
 
-export function fetchCoinTickers(coinId: string) {
+export function fetchTickers() {
+  return fetch(`${BASE_URL}/tickers?quotes=USD&limit=100`).then((response) =>
+    response.json()
+  );
+}
+
+export function fetchTickerDetail(coinId: string) {
   return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) =>
     response.json()
   );
