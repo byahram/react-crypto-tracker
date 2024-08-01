@@ -10,7 +10,7 @@ interface SearchBar {
 const SearchBar = ({ keyword, handleKeyword }: SearchBar) => {
   return (
     <Wrapper>
-      <IoSearchSharp size={25} />
+      <IoSearchSharp size={20} />
       <Input
         type="text"
         placeholder="코인명 검색"
@@ -30,12 +30,13 @@ const Wrapper = styled.div`
 `;
 
 const Input = styled.input`
-  width: 200px;
+  width: 100px;
   padding: 0.4rem 1.2rem;
   border-radius: 1rem;
-  background-color: #f1f3f5;
+  border: 1px solid ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.cardBgColor};
 
   &::placeholder {
-    color: #adb5bd;
+    color: ${(props) => props.theme.textColor};
   }
 `;

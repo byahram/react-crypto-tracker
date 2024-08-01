@@ -30,7 +30,7 @@ export interface CoinDetailInterface {
   last_data_at: string;
 }
 
-export interface TickerInterface {
+export interface PriceInterface {
   id: string;
   name: string;
   symbol: string;
@@ -62,6 +62,17 @@ export interface TickerInterface {
       percent_from_price_ath: number;
     };
   };
+}
+
+export interface ChartHistoricalInterface {
+  time_open: string;
+  time_close: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  market_cap: number;
 }
 
 export interface CoinHistoryInterface {}

@@ -1,35 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { fetchTickers } from "../api/api";
-import { TickerInterface } from "../api/interface";
+import { fetchPrices } from "../api/api";
+import { PriceInterface } from "../api/interface";
 import CoinRow from "../components/CoinRow";
-// import SearchBar from "../components/SearchBar";
-// import React, { useState } from "react";
+import SearchBar from "../components/SearchBar";
+import React, { useState } from "react";
+import { FaRegStar } from "react-icons/fa";
 
 const ColGroup = () => {
   return (
     <colgroup>
       <col width="5%" />
-      <col width="8%" />
-      <col width="37%" />
-      <col width="20%" />
+      <col width="10%" />
+      <col width="40%" />
       <col width="15%" />
-      <col width="20%" />
+      <col width="15%" />
+      <col width="15%" />
     </colgroup>
   );
 };
 
 export default function Main() {
-  // search
-  // const [keyword, setKeyword] = useState("");
-  // const handleKeyword = (event: React.FormEvent<HTMLSelectElement>) => {
-  //   setKeyword(event.target.value as any);
-  // };
+  // 현재 날짜
+  const today = new Date();
 
-  const { isLoading, data } = useQuery<TickerInterface[]>(
-    "allTickers",
-    fetchTickers
+  // 원하는 형식
+  const formatted = `${today.getFullYear()}. ${
+    today.getMonth() + 1
+  }. ${today.getDate()}`;
+
+  // search
+  const [keyword, setKeyword] = useState("");
+  const handleKeyword = (e: React.FormEvent<HTMLSelectElement>) => {
+    setKeyword(e.target as any);
+  };
+
+  // react-query : list
+  const { isLoading, data } = useQuery<PriceInterface[]>(
+    "allPrices",
+    fetchPrices
   );
 
   return (
@@ -38,10 +48,14 @@ export default function Main() {
         <div>Loading</div>
       ) : (
         <>
-          <CoinHeaderWrap>
-            <Title>코인 Top 100</Title>
-            {/* <SearchBar keyword={keyword} handleKeyword={handleKeyword} /> */}
-          </CoinHeaderWrap>
+          <HeaderWrap>
+            <LikedBtn size={20} />
+            <Title>
+              <p>{formatted}</p>
+              <h2>코인 Top 100</h2>
+            </Title>
+            <SearchBar keyword={keyword} handleKeyword={handleKeyword} />
+          </HeaderWrap>
           <CoinTableWrap>
             <HeadTable>
               <ColGroup />
@@ -73,34 +87,46 @@ export default function Main() {
   );
 }
 
-const MainContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+const LikedBtn = styled(FaRegStar)`
+  cursor: pointer;
 `;
 
-const CoinHeaderWrap = styled.header`
+const HeaderWrap = styled.header`
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.3rem 5rem 0;
+  padding: 20px 5rem 0;
 `;
 
 const Title = styled.div`
-  font-size: 1.8rem;
   font-weight: 600;
+
+  p {
+    font-size: 1rem;
+    text-align: center;
+    color: #535353;
+    margin-bottom: 4px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+`;
+
+const MainContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: calc(100% - 100px);
 `;
 
 const CoinTableWrap = styled.div`
-  position: absolute;
-  bottom: 0;
   display: flex;
   flex-direction: column;
-  width: calc(100% - 8rem);
-  height: calc(100% - 200px);
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
   gap: 2rem;
-  padding: 3rem 4rem;
+  padding: 2rem;
 `;
 
 const HeadTable = styled.table`
@@ -111,13 +137,13 @@ const BodyTableWrap = styled.div`
   overflow-y: auto;
   flex: 1;
 
-  ::-webkit-scrollbar {
-    width: 10px;
+  &::-webkit-scrollbar {
+    width: 8px;
   }
 
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background-color: #ddd;
+    background-color: ${(props) => props.theme.bgColor};
   }
 `;
 

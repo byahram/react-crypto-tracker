@@ -10,13 +10,13 @@ export function fetchCoinDetail(coinId: string) {
   );
 }
 
-export function fetchTickers() {
+export function fetchPrices() {
   return fetch(`${BASE_URL}/tickers?quotes=USD&limit=100`).then((response) =>
     response.json()
   );
 }
 
-export function fetchTickerDetail(coinId: string) {
+export function fetchPriceDetail(coinId: string) {
   return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) =>
     response.json()
   );

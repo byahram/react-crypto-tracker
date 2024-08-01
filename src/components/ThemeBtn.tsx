@@ -21,8 +21,8 @@ const ThemeIcon = styled(MdDarkMode)`
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15),
     0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15),
     0 16px 16px rgba(0, 0, 0, 0.15);
-  color: ${(props) => props.theme.bgColor};
-  background-color: ${(props) => props.theme.iconBgColor};
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.cardBgColor};
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
 

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FaRegStar, FaStar } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
 import styled from "styled-components";
-import { TickerInterface } from "../api/interface";
+import { PriceInterface } from "../api/interface";
 import { useNavigate } from "react-router-dom";
 
 interface CoinRowInterface {
-  coin: TickerInterface;
+  coin: PriceInterface;
 }
 
 const CoinRow = ({ coin }: CoinRowInterface) => {
@@ -17,7 +17,7 @@ const CoinRow = ({ coin }: CoinRowInterface) => {
   return (
     <Tr onClick={gotoDetail}>
       <Td align="center">
-        <FaRegStar size={20} />
+        <LikedBtn size={20} />
       </Td>
       <Td align="center">{coin.rank}</Td>
       <Td align="left" className="flexbox">
@@ -41,12 +41,16 @@ const CoinRow = ({ coin }: CoinRowInterface) => {
 
 export default CoinRow;
 
+const LikedBtn = styled(FaRegStar)`
+  cursor: pointer;
+`;
+
 const Tr = styled.tr`
   cursor: pointer;
 `;
 
 const Td = styled.td`
-  padding: 0.5rem 0;
+  padding: 0.9rem 0;
   text-align: ${({ align }) => align};
   vertical-align: middle;
 
